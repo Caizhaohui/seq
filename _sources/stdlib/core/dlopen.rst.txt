@@ -1,0 +1,29 @@
+.. seq:module:: core.dlopen
+
+:seq:mod:`core.dlopen`
+----------------------
+
+Source code: `core/dlopen.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/dlopen.seq>`_
+
+.. seq:function:: dlext()
+
+
+
+.. seq:function:: dlerror()
+
+
+
+.. seq:function:: dlopen(name : str, flag : int = (_C.RTLD_NOW | _C.RTLD_GLOBAL))
+
+
+
+.. seq:function:: dlsym(lib : str, name : str)
+
+
+
+.. seq:function:: dlclose(handle : cobj)
+
+
+
+
+

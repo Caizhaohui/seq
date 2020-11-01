@@ -1,0 +1,971 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>core.str &mdash; Seq 0.9.10 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="getopt" href="../getopt.html" />
+    <link rel="prev" title="core.sort" href="sort.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #333131" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Seq
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#install">Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro.html#pre-built-binaries">Pre-built binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro.html#building-from-source">Building from source</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/setup.html">Set-up</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/setup.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/setup.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/setup.html#creating-a-stand-alone-executable">Creating a stand-alone executable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/primer.html">Language Primer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#literals">Literals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#tuples">Tuples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#containers">Containers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#assignments-and-operators">Assignments and operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#tuple-unpacking">Tuple unpacking</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#control-flow">Control flow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#conditionals">Conditionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#loops">Loops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#comprehensions">Comprehensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#exception-handling">Exception handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#variables-and-scoping">Variables and scoping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#imports">Imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#generics">Generics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#generators">Generators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#pipes">Pipes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#foreign-function-interface-ffi">Foreign function interface (FFI)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#classes-and-types">Classes and types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#type-extensions">Type extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#magic-methods">Magic methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#limitations-and-key-differences-with-python">Limitations and key differences with Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#types">Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#genomics-specific-features">Genomics-specific features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#genomic-types">Genomic types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#sequence-matching">Sequence matching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#pipelines">Pipelines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#sequence-alignment">Sequence alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#genomic-index-prefetching">Genomic index prefetching</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#other-features">Other features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#parallelism">Parallelism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#type-extensions">Type extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#other-types">Other types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#c-c-and-python-interoperability">C/C++ and Python interoperability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#calling-bwa-from-seq">Calling BWA from Seq</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/workshop.html">Workshop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-1-reading-sequences-from-disk">Section 1: Reading sequences from disk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#full-code-listing">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-2-building-an-index">Section 2: Building an index</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id1">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-3-finding-k-mer-matches">Section 3: Finding k-mer matches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id2">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-4-smith-waterman-alignment-and-cigar-strings">Section 4: Smith-Waterman alignment and CIGAR strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id3">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-5-pipelines">Section 5: Pipelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#optional-parallelism">(Optional) Parallelism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id4">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-6-domain-specific-optimizations">Section 6: Domain-specific optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id5">Full code listing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#subsequence-extraction">Subsequence extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-extraction">k-mer extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reverse-complementation">Reverse complementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-hamming-distance">k-mer Hamming distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-hamming-neighbors">k-mer Hamming neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-minimizer">k-mer minimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#de-bruijn-edge">de Bruijn edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#count-bases">Count bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#spaced-seed-search">Spaced seed search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reverse-complement-palindrome">Reverse-complement palindrome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#sequence-alignment">Sequence alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-fasta-fastq">Reading FASTA/FASTQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-paired-end-fastq">Reading paired-end FASTQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#parallel-fastq-processing">Parallel FASTQ processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-sam-bam-cram">Reading SAM/BAM/CRAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#dna-to-protein-translation">DNA to protein translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-protein-sequences-from-fasta">Reading protein sequences from FASTA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Calling Python from Seq</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python.html#pyimport"><code class="docutils literal notranslate"><span class="pre">pyimport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python.html#pydef"><code class="docutils literal notranslate"><span class="pre">pydef</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../embed.html">Calling Seq from C/C++</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../embed.html#converting-types">Converting types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../build.html">Building from Source</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../build.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#platform-independent-notes">Platform-independent notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#macos">macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#ubuntu-debian">Ubuntu/Debian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#centos-rhel">CentOS/RHEL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../build.html#opam-setup">OPAM setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../build.html#building">Building</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Standard Library Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/index.html">algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/heapsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.heapsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/insertionsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.insertionsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/pdqsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.pdqsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/qsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.qsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/strings.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.strings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/timsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.timsort</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bio/index.html">bio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../bio/align.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bam.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bam</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bed.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/block.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.block</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/builtin.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.builtin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bwa.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bwa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bwt.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bwt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/c_htslib.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.c_htslib</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fai.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fai</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fasta.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fasta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fastq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fastq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fmindex.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fmindex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/intervals.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.intervals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/iter.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.iter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/locus.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.locus</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/pseq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.pseq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/seq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.seq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/vcf.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.vcf</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bisect.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../collections.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">core</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aliases.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.aliases</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.box</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtin.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.builtin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="c_stubs.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.c_stubs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="collections/index.html">core.collections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="collections/dict.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.dict</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="collections/khash.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.khash</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="collections/list.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="collections/set.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dlopen.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.dlopen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="err.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="float.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gc.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.gc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="int.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.int</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.optional</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.python</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="range.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.range</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="slice.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.slice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.sort</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getopt.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">getopt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gzip.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">gzip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heapq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">heapq</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../itertools.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">math</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../os/index.html">os</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../os/path.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">os.path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pickle.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">pickle</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">python</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sortedlist.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">sortedlist</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">string</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sys.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">sys</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threading.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">threading</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../time.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">time</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Seq</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Standard Library Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">core</a> &raquo;</li>
+        
+      <li><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.str</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/stdlib/core/str.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-core.str"></span><div class="section" id="core-str">
+<h1><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.str</span></code><a class="headerlink" href="#core-str" title="Permalink to this headline">¶</a></h1>
+<p>Source code: <a class="reference external" href="https://github.com/seq-lang/seq/blob/master/stdlib/core/str.seq">core/str.seq</a></p>
+<dl class="seq extension">
+<dt id="core.str.str">
+<em class="property">extension </em><code class="sig-name descname">str</code><a class="headerlink" href="#core.str.str" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Magic methods:</strong></p>
+<blockquote>
+<div><dl class="seq method">
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__ne__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__lt__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__gt__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__bool__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__add__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">eslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">slice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">lslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">rslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">esslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">rsslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">lsslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">sslice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__reversed__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__mul__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt>
+<code class="sig-name descname">__copy__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div></blockquote>
+<p><strong>Methods:</strong></p>
+<blockquote>
+<div><dl class="seq method">
+<dt id="core.str.str.c_str">
+<code class="sig-name descname">c_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.c_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.cat">
+<code class="sig-name descname">cat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list<span class="p">[</span><a class="reference internal" href="#core.str.str" title="core.str.str">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.cat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.cati">
+<code class="sig-name descname">cati</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">generator<span class="p">[</span><a class="reference internal" href="#core.str.str" title="core.str.str">str</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">total</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.cati" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.cati_ext">
+<code class="sig-name descname">cati_ext</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">generator<span class="p">[</span><a class="reference internal" href="#core.str.str" title="core.str.str">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.cati_ext" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.join">
+<code class="sig-name descname">join</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">l</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.join" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.from_ptr">
+<code class="sig-name descname">from_ptr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span><span class="p">:</span> <span class="n">cobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.from_ptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isdigit">
+<code class="sig-name descname">isdigit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isdigit" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isdigit() -&gt; bool</p>
+<p>Return True if all characters in str are digits
+and there is at least one character in str, False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.islower">
+<code class="sig-name descname">islower</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.islower" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.islower() -&gt; bool</p>
+<p>Return True if all cased characters in str are lowercase and there is
+at least one cased character in str, False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isupper">
+<code class="sig-name descname">isupper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isupper" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isupper() -&gt; bool</p>
+<p>Return True if all cased characters in str are uppercase and there is
+at least one cased character in str, False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isalnum">
+<code class="sig-name descname">isalnum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isalnum" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isalnum() -&gt; bool</p>
+<p>Return True if all characters in str are alphanumeric
+and there is at least one character in str, False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isalpha">
+<code class="sig-name descname">isalpha</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isalpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isalpha() -&gt; bool</p>
+<p>Return True if all characters in str are alphabetic
+and there is at least one character in str, False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isspace">
+<code class="sig-name descname">isspace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isspace() -&gt; bool</p>
+<p>Return True if all characters in str are whitespace
+and there is at least one character in str, False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.istitle">
+<code class="sig-name descname">istitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.istitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.istitle() -&gt; bool</p>
+<p>Return True if str is a titlecased string and there is at least one
+character in str, i.e. uppercase characters may only follow uncased
+characters and lowercase characters only cased ones. Return False
+otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.capitalize">
+<code class="sig-name descname">capitalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.capitalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.capitalize() -&gt; copy of str</p>
+<p>Return a copy of str with only its first character capitalized (ASCII)
+and the rest lower-cased.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isdecimal">
+<code class="sig-name descname">isdecimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isdecimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isdecimal() -&gt; bool</p>
+<p>Return True if str is a decimal string, False otherwise.
+str is a decimal string if all characters in str are decimal and
+there is at least one character in str.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.lower">
+<code class="sig-name descname">lower</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.lower" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.lower() -&gt; copy of str</p>
+<p>Return a copy of str with all ASCII characters converted to lowercase.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.upper">
+<code class="sig-name descname">upper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.upper" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.upper() -&gt; copy of str</p>
+<p>Return a copy of str with all ASCII characters converted to uppercase.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isascii">
+<code class="sig-name descname">isascii</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isascii() -&gt; bool</p>
+<p>Return True if str is empty or all characters in str are ASCII,
+False otherwise.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.casefold">
+<code class="sig-name descname">casefold</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.casefold" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.casefold() -&gt; copy of str</p>
+<p>Return a version of the string suitable for caseless comparisons.</p>
+<p>Unlike Python, casefold() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.swapcase">
+<code class="sig-name descname">swapcase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.swapcase" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.swapcase() -&gt; copy of str</p>
+<p>Return a copy of str with uppercase ASCII characters converted
+to lowercase ASCII and vice versa.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.title">
+<code class="sig-name descname">title</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.title() -&gt; copy of str</p>
+<p>Return a titlecased version of str, i.e. ASCII words start with uppercase
+characters, all remaining cased characters have lowercase.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isnumeric">
+<code class="sig-name descname">isnumeric</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isnumeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isdecimal() -&gt; bool</p>
+<p>Return True if the string is a numeric string, False otherwise.
+A string is numeric if all characters in the string are numeric
+and there is at least one character in the string.</p>
+<p>Unlike Python, isnumeric() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.ljust">
+<code class="sig-name descname">ljust</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">width</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">fillchar</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.ljust" title="Permalink to this definition">¶</a></dt>
+<dd><p>ljust(width[, fillchar]) -&gt; string</p>
+<p>Return a left-justified string of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.rjust">
+<code class="sig-name descname">rjust</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">width</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">fillchar</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.rjust" title="Permalink to this definition">¶</a></dt>
+<dd><p>rjust(width[, fillchar]) -&gt; string</p>
+<p>Return a right-justified string of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.center">
+<code class="sig-name descname">center</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">width</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">fillchar</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.center(width[, fillchar]) -&gt; string</p>
+<p>Return str centered in a string of length width. Padding is
+done using the specified fill character (default is a space)</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.zfill">
+<code class="sig-name descname">zfill</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">width</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.zfill" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.zfill(width) -&gt; string</p>
+<p>Pad a numeric string str with zeros on the left, to fill a field
+of the specified width.  The string str is never truncated.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.count">
+<code class="sig-name descname">count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sub</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.count(sub[, start[, end]]) -&gt; int</p>
+<p>Return the number of occurrences of subsection sub in
+bytes str[start:end].  Optional arguments start and end are interpreted
+as in slice notation.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sub</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.find(sub [,start [,end]]) -&gt; int</p>
+<p>Return the lowest index in str where substring sub is found,
+such that sub is contained within str[start:end].  Optional
+arguments start and end are interpreted as in slice notation.</p>
+<p>Return -1 on failure.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.rfind">
+<code class="sig-name descname">rfind</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sub</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.rfind" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.rfind(sub [,start [,end]]) -&gt; int</p>
+<p>Return the highest index in str where substring sub is found,
+such that sub is contained within str[start:end].  Optional
+arguments start and end are interpreted as in slice notation.</p>
+<p>Return -1 on failure.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isidentifier">
+<code class="sig-name descname">isidentifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isidentifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isidentifier() -&gt; bool</p>
+<p>Return True if the string is a valid identifier, False otherwise.
+Unlike Python, isidentifier() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.isprintable">
+<code class="sig-name descname">isprintable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.isprintable" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.isprintable() -&gt; bool</p>
+<p>Return True if the string is printable or empty, False otherwise.
+Unlike Python, isprintable() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.lstrip">
+<code class="sig-name descname">lstrip</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.lstrip" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.lstrip([chars]) -&gt; string</p>
+<p>Return a copy of the string str with leading whitespace removed.
+If chars is given, remove characters in chars instead.
+Unlike Python, lstrip() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.rstrip">
+<code class="sig-name descname">rstrip</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.rstrip" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.rstrip([chars]) -&gt; string</p>
+<p>Return a copy of the string str with trailing whitespace removed.
+If chars is given, remove characters in chars instead.
+Unlike Python, lstrip() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.strip">
+<code class="sig-name descname">strip</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.strip" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.strip([chars]) -&gt; string</p>
+<p>Return a copy of the string str with leading and trailing
+whitespace removed.
+If chars is given, remove characters in chars instead.
+Unlike Python, lstrip() deals with just ASCII characters.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.partition">
+<code class="sig-name descname">partition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sep</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for the separator sep in str, and return the part before it,
+the separator itself, and the part after it.  If the separator is not
+found, return str and two empty strings.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.rpartition">
+<code class="sig-name descname">rpartition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sep</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.rpartition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for the separator sep in str, starting at the end of str, and return
+the part before it, the separator itself, and the part after it.  If the
+separator is not found, return two empty strings and str.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.split">
+<code class="sig-name descname">split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sep</span><span class="p">:</span> <span class="n">optional<span class="p">[</span><a class="reference internal" href="#core.str.str" title="core.str.str">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxsplit</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.split([sep [,maxsplit]]) -&gt; list of strings</p>
+<p>Return a list of the words in the string str, using sep as the
+delimiter string.  If maxsplit is given, at most maxsplit
+splits are done. If sep is not specified, any
+whitespace string is a separator and empty strings are removed
+from the result.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.rsplit">
+<code class="sig-name descname">rsplit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sep</span><span class="p">:</span> <span class="n">optional<span class="p">[</span><a class="reference internal" href="#core.str.str" title="core.str.str">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxsplit</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.rsplit" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.rsplit([sep [,maxsplit]]) -&gt; list of strings</p>
+<p>Return a list of the words in the string str, using sep as the
+delimiter string, starting at the end of the string and working
+to the front.  If maxsplit is given, at most maxsplit splits are
+done. If sep is not specified, any whitespace string
+is a separator.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.splitlines">
+<code class="sig-name descname">splitlines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keepends</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.splitlines" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.splitlines([keepends]) -&gt; list of strings</p>
+<p>Return a list of the lines in str, breaking at line boundaries.
+Line breaks are not included in the resulting list unless keepends
+is given and true.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.startswith">
+<code class="sig-name descname">startswith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prefix</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.startswith" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.startswith(prefix[, start[, end]]) -&gt; bool</p>
+<p>Return True if str starts with the specified prefix, False otherwise.
+With optional start, test str beginning at that position.
+With optional end, stop comparing str at that position.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.endswith">
+<code class="sig-name descname">endswith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">suffix</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.endswith" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.endswith(prefix[, start[, end]]) -&gt; bool</p>
+<p>Return True if str ends with the specified suffix, False otherwise.
+With optional start, test str beginning at that position.
+With optional end, stop comparing str at that position.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.index">
+<code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sub</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.index(sub [,start [,end]]) -&gt; int</p>
+<p>Like str.find() but raise ValueError when the substring is not found.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.rindex">
+<code class="sig-name descname">rindex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sub</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.rindex" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.index(sub [,start [,end]]) -&gt; int</p>
+<p>Like str.find() but raise ValueError when the substring is not found.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.replace">
+<code class="sig-name descname">replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">old</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">new</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.str.str" title="core.str.str">str</a></span></em>, <em class="sig-param"><span class="n">maxcount</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.replace(old, new[, count]) -&gt; string</p>
+<p>Return a copy of string str with all occurrences of substring
+old replaced by new.  If the optional argument maxcount is
+given, only the first maxcount occurrences are replaced.</p>
+<p>For now, maxcount is required.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.expandtabs">
+<code class="sig-name descname">expandtabs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tabsize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.expandtabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>str.expandtabs([tabsize]) -&gt; string</p>
+<p>Return a copy of str where all tab characters are expanded using spaces.
+If tabsize is not given, a tab size of 8 characters is assumed.</p>
+</dd></dl>
+
+<dl class="seq method">
+<dt id="core.str.str.translate">
+<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.str.str.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy with each character mapped by the given translation table.</p>
+<p>Unlike Python, translate() currently does not allow the translation
+table to be a bytes object of length 256.</p>
+<p>As well, None implemented yet until None and be placed inside the table
+with other strings. Use: {‘a’: ‘’} to replace a string for now</p>
+</dd></dl>
+
+</div></blockquote>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../getopt.html" class="btn btn-neutral float-right" title="getopt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sort.html" class="btn btn-neutral float-left" title="core.sort" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, seq-lang
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

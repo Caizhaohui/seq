@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>core.dlopen &mdash; Seq 0.9.10 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.err" href="err.html" />
+    <link rel="prev" title="core.collections.set" href="collections/set.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #333131" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Seq
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#install">Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro.html#pre-built-binaries">Pre-built binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro.html#building-from-source">Building from source</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/setup.html">Set-up</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/setup.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/setup.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/setup.html#creating-a-stand-alone-executable">Creating a stand-alone executable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/primer.html">Language Primer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#literals">Literals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#tuples">Tuples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#containers">Containers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#assignments-and-operators">Assignments and operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#tuple-unpacking">Tuple unpacking</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#control-flow">Control flow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#conditionals">Conditionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#loops">Loops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#comprehensions">Comprehensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#exception-handling">Exception handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#variables-and-scoping">Variables and scoping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#imports">Imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#generics">Generics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#generators">Generators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#pipes">Pipes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#foreign-function-interface-ffi">Foreign function interface (FFI)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/primer.html#classes-and-types">Classes and types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#type-extensions">Type extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/primer.html#magic-methods">Magic methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#limitations-and-key-differences-with-python">Limitations and key differences with Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#types">Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#genomics-specific-features">Genomics-specific features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#genomic-types">Genomic types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#sequence-matching">Sequence matching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#pipelines">Pipelines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#sequence-alignment">Sequence alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#genomic-index-prefetching">Genomic index prefetching</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#other-features">Other features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#parallelism">Parallelism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#type-extensions">Type extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#other-types">Other types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/tutorial.html#c-c-and-python-interoperability">C/C++ and Python interoperability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/tutorial.html#calling-bwa-from-seq">Calling BWA from Seq</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/workshop.html">Workshop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-1-reading-sequences-from-disk">Section 1: Reading sequences from disk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#full-code-listing">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-2-building-an-index">Section 2: Building an index</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id1">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-3-finding-k-mer-matches">Section 3: Finding k-mer matches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id2">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-4-smith-waterman-alignment-and-cigar-strings">Section 4: Smith-Waterman alignment and CIGAR strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id3">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-5-pipelines">Section 5: Pipelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#optional-parallelism">(Optional) Parallelism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id4">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial/workshop.html#section-6-domain-specific-optimizations">Section 6: Domain-specific optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorial/workshop.html#id5">Full code listing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#subsequence-extraction">Subsequence extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-extraction">k-mer extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reverse-complementation">Reverse complementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-hamming-distance">k-mer Hamming distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-hamming-neighbors">k-mer Hamming neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#k-mer-minimizer">k-mer minimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#de-bruijn-edge">de Bruijn edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#count-bases">Count bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#spaced-seed-search">Spaced seed search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reverse-complement-palindrome">Reverse-complement palindrome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#sequence-alignment">Sequence alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-fasta-fastq">Reading FASTA/FASTQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-paired-end-fastq">Reading paired-end FASTQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#parallel-fastq-processing">Parallel FASTQ processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-sam-bam-cram">Reading SAM/BAM/CRAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#dna-to-protein-translation">DNA to protein translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook.html#reading-protein-sequences-from-fasta">Reading protein sequences from FASTA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Calling Python from Seq</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python.html#pyimport"><code class="docutils literal notranslate"><span class="pre">pyimport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python.html#pydef"><code class="docutils literal notranslate"><span class="pre">pydef</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../embed.html">Calling Seq from C/C++</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../embed.html#converting-types">Converting types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../build.html">Building from Source</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../build.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#platform-independent-notes">Platform-independent notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#macos">macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#ubuntu-debian">Ubuntu/Debian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#centos-rhel">CentOS/RHEL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../build.html#opam-setup">OPAM setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../build.html#building">Building</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build.html#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Standard Library Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/index.html">algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/heapsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.heapsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/insertionsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.insertionsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/pdqsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.pdqsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/qsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.qsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/strings.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.strings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/timsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.timsort</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bio/index.html">bio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../bio/align.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bam.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bam</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bed.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/block.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.block</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/builtin.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.builtin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bwa.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bwa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/bwt.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bwt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/c_htslib.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.c_htslib</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fai.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fai</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fasta.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fasta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fastq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fastq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/fmindex.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fmindex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/intervals.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.intervals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/iter.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.iter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/locus.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.locus</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/pseq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.pseq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/seq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.seq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bio/vcf.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.vcf</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bisect.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../collections.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">core</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aliases.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.aliases</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.box</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtin.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.builtin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="c_stubs.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.c_stubs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="collections/index.html">core.collections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="collections/dict.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.dict</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="collections/khash.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.khash</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="collections/list.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="collections/set.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.dlopen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="err.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="float.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gc.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.gc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="int.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.int</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.optional</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.python</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="range.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.range</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="slice.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.slice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.sort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="str.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getopt.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">getopt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gzip.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">gzip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heapq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">heapq</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../itertools.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">math</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../os/index.html">os</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../os/path.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">os.path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pickle.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">pickle</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">python</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sortedlist.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">sortedlist</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">string</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sys.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">sys</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threading.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">threading</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../time.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">time</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Seq</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Standard Library Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">core</a> &raquo;</li>
+        
+      <li><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.dlopen</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/stdlib/core/dlopen.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-core.dlopen"></span><div class="section" id="core-dlopen">
+<h1><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.dlopen</span></code><a class="headerlink" href="#core-dlopen" title="Permalink to this headline">¶</a></h1>
+<p>Source code: <a class="reference external" href="https://github.com/seq-lang/seq/blob/master/stdlib/core/dlopen.seq">core/dlopen.seq</a></p>
+<dl class="seq function">
+<dt id="core.dlopen.dlext">
+<code class="sig-prename descclassname">core.dlopen.</code><code class="sig-name descname">dlext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.dlopen.dlext" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq function">
+<dt id="core.dlopen.dlerror">
+<code class="sig-prename descclassname">core.dlopen.</code><code class="sig-name descname">dlerror</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.dlopen.dlerror" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq function">
+<dt id="core.dlopen.dlopen">
+<code class="sig-prename descclassname">core.dlopen.</code><code class="sig-name descname">dlopen</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">flag</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">_C.RTLD_NOW | _C.RTLD_GLOBAL</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.dlopen.dlopen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq function">
+<dt id="core.dlopen.dlsym">
+<code class="sig-prename descclassname">core.dlopen.</code><code class="sig-name descname">dlsym</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lib</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.dlopen.dlsym" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="seq function">
+<dt id="core.dlopen.dlclose">
+<code class="sig-prename descclassname">core.dlopen.</code><code class="sig-name descname">dlclose</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span><span class="p">:</span> <span class="n">cobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.dlopen.dlclose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="err.html" class="btn btn-neutral float-right" title="core.err" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="collections/set.html" class="btn btn-neutral float-left" title="core.collections.set" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, seq-lang
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

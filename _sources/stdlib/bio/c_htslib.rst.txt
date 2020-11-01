@@ -1,0 +1,221 @@
+.. seq:module:: bio.c_htslib
+
+:seq:mod:`bio.c_htslib`
+-----------------------
+
+Source code: `bio/c_htslib.seq <https://github.com/seq-lang/seq/blob/master/stdlib/bio/c_htslib.seq>`_
+
+.. seq:data:: LD
+
+
+
+.. seq:function:: hts_open()
+
+
+
+.. seq:function:: hts_close()
+
+
+
+.. seq:function:: hts_idx_destroy()
+
+
+
+.. seq:function:: hts_itr_destroy()
+
+
+
+.. seq:function:: hts_itr_destroy()
+
+
+
+.. seq:function:: hts_itr_next()
+
+
+
+.. seq:function:: sam_index_load()
+
+
+
+.. seq:function:: sam_hdr_read()
+
+
+
+.. seq:function:: sam_itr_querys()
+
+
+
+.. seq:function:: sam_read1()
+
+
+
+.. seq:function:: bam_read1()
+
+
+
+.. seq:function:: bam_init1()
+
+
+
+.. seq:function:: bam_cigar2qlen()
+
+
+
+.. seq:function:: bam_cigar2rlen()
+
+
+
+.. seq:function:: bam_aux_get()
+
+
+
+.. seq:function:: bam_aux2i()
+
+
+
+.. seq:function:: bam_aux2f()
+
+
+
+.. seq:function:: bam_aux2A()
+
+
+
+.. seq:function:: bam_aux2Z()
+
+
+
+.. seq:function:: bam_auxB_len()
+
+
+
+.. seq:function:: bam_auxB2i()
+
+
+
+.. seq:function:: bam_auxB2f()
+
+
+
+.. seq:function:: bam_endpos()
+
+
+
+.. seq:function:: sam_hdr_destroy()
+
+
+
+.. seq:function:: bam_destroy1()
+
+
+
+.. seq:function:: bcf_hdr_read()
+
+
+
+.. seq:function:: bcf_read()
+
+
+
+.. seq:function:: bcf_unpack()
+
+
+
+.. seq:function:: bcf_hdr_destroy()
+
+
+
+.. seq:function:: bcf_init()
+
+
+
+.. seq:function:: bcf_destroy()
+
+
+
+.. seq:function:: bcf_get_variant_types()
+
+
+
+.. seq:function:: bcf_get_variant_type()
+
+
+
+.. seq:function:: bcf_is_snp()
+
+
+
+.. seq:function:: bcf_has_filter()
+
+
+
+.. seq:function:: bcf_get_fmt()
+
+
+
+.. seq:function:: bcf_get_info()
+
+
+
+.. seq:function:: bcf_get_fmt_id()
+
+
+
+.. seq:function:: bcf_get_info_id()
+
+
+
+.. seq:function:: bcf_get_format_values()
+
+
+
+.. seq:function:: bcf_hdr_id2int()
+
+
+
+.. seq:function:: bcf_has_filter()
+
+
+
+.. seq:function:: bcf_hrec_format()
+
+
+
+.. seq:function:: bcf_clear()
+
+
+
+.. seq:function:: bcf_empty()
+
+
+
+.. seq:function:: bcf_dup()
+
+
+
+.. seq:function:: bcf_get_info_values()
+
+
+
+.. seq:function:: hts_version()
+
+
+
+.. seq:function:: seq_get_htsfile_fp()
+
+
+
+.. seq:function:: seq_is_htsfile_cram()
+
+
+
+.. seq:function:: seq_is_htsfile_bgzf()
+
+
+
+.. seq:function:: sam_itr_next(file : cobj, itr : cobj, r : cobj)
+
+
+
+
+

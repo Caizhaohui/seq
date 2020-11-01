@@ -1,0 +1,151 @@
+.. seq:module:: core.collections.list
+
+:seq:mod:`core.collections.list`
+--------------------------------
+
+Source code: `core/collections/list.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/collections/list.seq>`_
+
+.. seq:class:: list[T]
+
+   **Magic methods:**
+
+      .. seq:method:: __init__(arr : array[T], len : int)
+         :noindex:
+
+      .. seq:method:: __init__(capacity : int)
+         :noindex:
+
+      .. seq:method:: __init__()
+         :noindex:
+
+      .. seq:method:: __init__(it : generator[T])
+         :noindex:
+
+      .. seq:method:: __init__(other : list[T])
+         :noindex:
+
+      .. seq:method:: __len__()
+         :noindex:
+
+      .. seq:method:: __bool__()
+         :noindex:
+
+      .. seq:method:: __getitem__(idx : int)
+         :noindex:
+
+      .. seq:method:: __setitem__(idx : int, val : T)
+         :noindex:
+
+      .. seq:method:: __delitem__(idx : int)
+         :noindex:
+
+      .. seq:method:: __eq__(other : list[T])
+         :noindex:
+
+      .. seq:method:: __ne__(other : list[T])
+         :noindex:
+
+      .. seq:method:: __getitem__(s : eslice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : slice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : lslice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : rslice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : esslice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : sslice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : lsslice)
+         :noindex:
+
+      .. seq:method:: __getitem__(s : rsslice)
+         :noindex:
+
+      .. seq:method:: __setitem__(s : eslice, other : generator[T])
+         :noindex:
+
+      .. seq:method:: __setitem__(s : slice, other : generator[T])
+         :noindex:
+
+      .. seq:method:: __setitem__(s : lslice, other : generator[T])
+         :noindex:
+
+      .. seq:method:: __setitem__(s : rslice, other : generator[T])
+         :noindex:
+
+      .. seq:method:: __delitem__(s : eslice)
+         :noindex:
+
+      .. seq:method:: __delitem__(s : slice)
+         :noindex:
+
+      .. seq:method:: __delitem__(s : lslice)
+         :noindex:
+
+      .. seq:method:: __delitem__(s : rslice)
+         :noindex:
+
+      .. seq:method:: __contains__(x : T)
+         :noindex:
+
+      .. seq:method:: __copy__()
+         :noindex:
+
+      .. seq:method:: __iter__()
+         :noindex:
+
+      .. seq:method:: __reversed__()
+         :noindex:
+
+      .. seq:method:: __add__(other : list[T])
+         :noindex:
+
+      .. seq:method:: __iadd__(other : list[T])
+         :noindex:
+
+      .. seq:method:: __mul__(n : int)
+         :noindex:
+
+      .. seq:method:: __imul__(n : int)
+         :noindex:
+
+      .. seq:method:: __str__()
+         :noindex:
+
+      .. seq:method:: __hash__()
+         :noindex:
+
+   **Methods:**
+
+      .. seq:method:: prefetch(idx : int)
+
+      .. seq:method:: append(x : T)
+
+      .. seq:method:: ext(itr)
+
+      .. seq:method:: insert(idx : int, x : T)
+
+      .. seq:method:: pop(idx : int = -1)
+
+      .. seq:method:: remove(x : T)
+
+      .. seq:method:: clear()
+
+      .. seq:method:: index(x : T)
+
+      .. seq:method:: count(x : T)
+
+      .. seq:method:: reverse()
+
+
+
+
+

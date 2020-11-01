@@ -1,0 +1,13 @@
+.. seq:module:: core.optional
+
+:seq:mod:`core.optional`
+------------------------
+
+Source code: `core/optional.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/optional.seq>`_
+
+.. seq:function:: unwrap(opt)
+
+
+
+
+

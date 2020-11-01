@@ -1,0 +1,47 @@
+.. seq:module:: core.slice
+
+:seq:mod:`core.slice`
+---------------------
+
+Source code: `core/slice.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/slice.seq>`_
+
+.. seq:type:: eslice
+
+
+
+.. seq:type:: rslice
+
+
+
+.. seq:type:: lslice
+
+
+
+.. seq:type:: slice
+
+    [start:end]
+
+   **Methods:**
+
+      .. seq:method:: adjust_indices(length : int, start : optional[int] = None, stop : optional[int] = None, step : optional[int] = None)
+
+
+
+.. seq:type:: esslice
+
+
+
+.. seq:type:: rsslice
+
+
+
+.. seq:type:: lsslice
+
+
+
+.. seq:type:: sslice
+
+
+
+
+

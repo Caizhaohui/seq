@@ -1,0 +1,25 @@
+.. seq:module:: core.sort
+
+:seq:mod:`core.sort`
+--------------------
+
+Source code: `core/sort.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/sort.seq>`_
+
+.. seq:function:: sorted[S, T](v : generator[T], key : optional[function[S, T]] = None, algorithm : optional[str] = None, reverse : bool = False)
+
+   
+       Return a sorted list of the elements in v
+   
+
+
+
+.. seq:extension:: list[T]
+
+   **Methods:**
+
+      .. seq:method:: sort[S](key : optional[function[S, T]] = None, algorithm : optional[str] = None, reverse : bool = False)
+
+
+
+
+

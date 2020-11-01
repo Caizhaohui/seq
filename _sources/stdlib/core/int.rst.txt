@@ -1,0 +1,40 @@
+.. seq:module:: core.int
+
+:seq:mod:`core.int`
+-------------------
+
+Source code: `core/int.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/int.seq>`_
+
+.. seq:extension:: int
+
+   **Magic methods:**
+
+      .. seq:method:: __init__(s : str)
+         :noindex:
+
+      .. seq:method:: __init__(s : str, base : int)
+         :noindex:
+
+      .. seq:method:: __pow__(exp : int)
+         :noindex:
+
+      .. seq:method:: __pow__(exp : float)
+         :noindex:
+
+   **Methods:**
+
+      .. seq:method:: popcnt()
+
+
+
+.. seq:extension:: byte
+
+   **Magic methods:**
+
+      .. seq:method:: __repr__()
+         :noindex:
+
+
+
+
+

@@ -1,0 +1,11 @@
+.. seq:module:: core.collections
+
+core.collections
+========
+
+.. toctree::
+
+   dict
+   khash
+   list
+   set

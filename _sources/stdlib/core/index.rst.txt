@@ -1,0 +1,24 @@
+.. seq:module:: core
+
+core
+========
+
+.. toctree::
+
+   aliases
+   box
+   builtin
+   c_stubs
+   collections/index
+   dlopen
+   err
+   file
+   float
+   gc
+   int
+   optional
+   python
+   range
+   slice
+   sort
+   str

@@ -1,0 +1,317 @@
+.. seq:module:: core.python
+
+:seq:mod:`core.python`
+----------------------
+
+Source code: `core/python.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/python.seq>`_
+
+.. seq:data:: LD
+
+
+
+.. seq:function:: PyUnicode_AsEncodedString()
+
+
+
+.. seq:function:: PyBytes_AsString()
+
+
+
+.. seq:function:: PyErr_Fetch()
+
+
+
+.. seq:function:: PyObject_GetAttrString()
+
+
+
+.. seq:function:: PyObject_Str()
+
+
+
+.. seq:function:: PyRun_SimpleString()
+
+
+
+.. seq:function:: Py_IncRef()
+
+
+
+.. seq:function:: Py_DecRef()
+
+
+
+.. seq:function:: PyObject_CallObject()
+
+
+
+.. seq:function:: PyObject_SetAttrString()
+
+
+
+.. seq:function:: PyObject_Length()
+
+
+
+.. seq:function:: Py_Initialize()
+
+
+
+.. seq:function:: PyImport_ImportModule()
+
+
+
+.. seq:function:: PyLong_FromLong()
+
+
+
+.. seq:function:: PyLong_AsLong()
+
+
+
+.. seq:function:: PyFloat_FromDouble()
+
+
+
+.. seq:function:: PyFloat_AsDouble()
+
+
+
+.. seq:function:: PyBool_FromLong()
+
+
+
+.. seq:function:: PyObject_IsTrue()
+
+
+
+.. seq:function:: PyUnicode_DecodeFSDefaultAndSize()
+
+
+
+.. seq:function:: PyTuple_New()
+
+
+
+.. seq:function:: PyTuple_SetItem()
+
+
+
+.. seq:function:: PyTuple_GetItem()
+
+
+
+.. seq:function:: PyList_New()
+
+
+
+.. seq:function:: PyList_SetItem()
+
+
+
+.. seq:function:: PyList_GetItem()
+
+
+
+.. seq:function:: PySet_New()
+
+
+
+.. seq:function:: PySet_Add()
+
+
+
+.. seq:function:: PyDict_New()
+
+
+
+.. seq:function:: PyDict_SetItem()
+
+
+
+.. seq:function:: PyDict_Next()
+
+
+
+.. seq:type:: pyobj
+
+   **Magic methods:**
+
+      .. seq:method:: __getitem__(name : str)
+         :noindex:
+
+      .. seq:method:: __setitem__(name : str, val : pyobj)
+         :noindex:
+
+      .. seq:method:: __len__()
+         :noindex:
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__()
+         :noindex:
+
+   **Methods:**
+
+      .. seq:method:: to_str(errors : str, empty : str = "")
+
+      .. seq:method:: exc_check()
+
+      .. seq:method:: exc_wrap(_retval)
+
+      .. seq:method:: incref()
+
+      .. seq:method:: decref()
+
+      .. seq:method:: call(args : optional[pyobj] = None)
+
+
+
+.. seq:function:: init()
+
+
+
+.. seq:function:: ensure_initialized()
+
+
+
+.. seq:function:: none()
+
+
+
+.. seq:function:: imp(name : str)
+
+
+
+.. seq:function:: exec(code : str)
+
+
+
+.. seq:function:: py(x)
+
+
+
+.. seq:function:: get[T](x : pyobj)
+
+
+
+.. seq:extension:: int
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(i : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: float
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(d : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: bool
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(b : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: byte
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(c : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: str
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(s : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: seq
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(s : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: list[T]
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(v : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: dict[K,V]
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+      .. seq:method:: __from_py__(d : pyobj)
+         :noindex:
+
+
+
+.. seq:extension:: set[K]
+
+   **Magic methods:**
+
+      .. seq:method:: __to_py__()
+         :noindex:
+
+
+
+.. seq:function:: py_tuple_new(len : int)
+
+
+
+.. seq:function:: py_tuple_setitem(obj : cobj, idx : int, val : cobj)
+
+
+
+.. seq:function:: py_tuple_getitem(obj : cobj, idx : int)
+
+
+
+
+

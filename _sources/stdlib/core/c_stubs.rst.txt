@@ -1,0 +1,489 @@
+.. seq:module:: core.c_stubs
+
+:seq:mod:`core.c_stubs`
+-----------------------
+
+Source code: `core/c_stubs.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/c_stubs.seq>`_
+
+.. seq:function:: seq_alloc()
+
+
+
+.. seq:function:: seq_alloc_atomic()
+
+
+
+.. seq:function:: seq_realloc()
+
+
+
+.. seq:function:: seq_free()
+
+
+
+.. seq:function:: seq_gc_add_roots()
+
+
+
+.. seq:function:: seq_gc_remove_roots()
+
+
+
+.. seq:function:: seq_gc_clear_roots()
+
+
+
+.. seq:function:: seq_gc_exclude_static_roots()
+
+
+
+.. seq:function:: seq_strdup()
+
+
+
+.. seq:function:: seq_str_ptr()
+
+
+
+.. seq:function:: seq_check_errno()
+
+
+
+.. seq:function:: seq_stdin()
+
+
+
+.. seq:function:: seq_stdout()
+
+
+
+.. seq:function:: seq_stderr()
+
+
+
+.. seq:function:: seq_env()
+
+
+
+.. seq:function:: seq_time()
+
+
+
+.. seq:function:: seq_time_monotonic()
+
+
+
+.. seq:function:: seq_pid()
+
+
+
+.. seq:function:: seq_lock_new()
+
+
+
+.. seq:function:: seq_lock_acquire()
+
+
+
+.. seq:function:: seq_lock_release()
+
+
+
+.. seq:function:: seq_rlock_new()
+
+
+
+.. seq:function:: seq_rlock_acquire()
+
+
+
+.. seq:function:: seq_rlock_release()
+
+
+
+.. seq:function:: seq_is_macos()
+
+
+
+.. seq:function:: seq_i32_to_float()
+
+
+
+.. seq:function:: strtoll()
+
+
+
+.. seq:function:: strtod()
+
+
+
+.. seq:function:: strlen()
+
+
+
+.. seq:function:: isdigit()
+
+
+
+.. seq:function:: isspace()
+
+
+
+.. seq:function:: isupper()
+
+
+
+.. seq:function:: islower()
+
+
+
+.. seq:function:: toupper()
+
+
+
+.. seq:function:: tolower()
+
+
+
+.. seq:function:: isalnum()
+
+
+
+.. seq:function:: isalpha()
+
+
+
+.. seq:function:: istitle()
+
+
+
+.. seq:function:: ceil()
+
+
+
+.. seq:function:: floor()
+
+
+
+.. seq:function:: fabs()
+
+
+
+.. seq:function:: fmod()
+
+
+
+.. seq:function:: exp()
+
+
+
+.. seq:function:: expm1()
+
+
+
+.. seq:function:: ldexp()
+
+
+
+.. seq:function:: log()
+
+
+
+.. seq:function:: log2()
+
+
+
+.. seq:function:: log10()
+
+
+
+.. seq:function:: sqrt()
+
+
+
+.. seq:function:: pow()
+
+
+
+.. seq:function:: round()
+
+
+
+.. seq:function:: acos()
+
+
+
+.. seq:function:: asin()
+
+
+
+.. seq:function:: atan()
+
+
+
+.. seq:function:: atan2()
+
+
+
+.. seq:function:: cos()
+
+
+
+.. seq:function:: sin()
+
+
+
+.. seq:function:: tan()
+
+
+
+.. seq:function:: cosh()
+
+
+
+.. seq:function:: sinh()
+
+
+
+.. seq:function:: tanh()
+
+
+
+.. seq:function:: acosh()
+
+
+
+.. seq:function:: asinh()
+
+
+
+.. seq:function:: atanh()
+
+
+
+.. seq:function:: copysign()
+
+
+
+.. seq:function:: log1p()
+
+
+
+.. seq:function:: trunc()
+
+
+
+.. seq:function:: log2()
+
+
+
+.. seq:function:: erf()
+
+
+
+.. seq:function:: erfc()
+
+
+
+.. seq:function:: tgamma()
+
+
+
+.. seq:function:: lgamma()
+
+
+
+.. seq:function:: remainder()
+
+
+
+.. seq:function:: frexp()
+
+
+
+.. seq:function:: modf()
+
+
+
+.. seq:function:: ferror()
+
+
+
+.. seq:function:: fgetc()
+
+
+
+.. seq:function:: fopen()
+
+
+
+.. seq:function:: fclose()
+
+
+
+.. seq:function:: fread()
+
+
+
+.. seq:function:: fwrite()
+
+
+
+.. seq:function:: ftell()
+
+
+
+.. seq:function:: fseek()
+
+
+
+.. seq:function:: fgets()
+
+
+
+.. seq:function:: getline()
+
+
+
+.. seq:function:: exit()
+
+
+
+.. seq:function:: system()
+
+
+
+.. seq:function:: free()
+
+
+
+.. seq:function:: atoi()
+
+
+
+.. seq:function:: dlerror()
+
+
+
+.. seq:function:: dlopen()
+
+
+
+.. seq:function:: dlsym()
+
+
+
+.. seq:function:: dlclose()
+
+
+
+.. seq:data:: RTLD_NOW
+
+
+
+.. seq:data:: RTLD_GLOBAL
+
+
+
+.. seq:function:: gzopen()
+
+
+
+.. seq:function:: gzerror()
+
+
+
+.. seq:function:: gzgetc()
+
+
+
+.. seq:function:: gzgets()
+
+
+
+.. seq:function:: gzclose()
+
+
+
+.. seq:function:: gzread()
+
+
+
+.. seq:function:: gzwrite()
+
+
+
+.. seq:function:: gztell()
+
+
+
+.. seq:function:: gzseek()
+
+
+
+.. seq:type:: CIGAR
+
+
+
+.. seq:type:: Alignment
+
+
+
+.. seq:type:: pseq
+
+
+
+.. seq:function:: seq_align()
+
+
+
+.. seq:function:: seq_align_dual()
+
+
+
+.. seq:function:: seq_align_splice()
+
+
+
+.. seq:function:: seq_align_global()
+
+
+
+.. seq:function:: seq_align_default()
+
+
+
+.. seq:function:: seq_palign()
+
+
+
+.. seq:function:: seq_palign_dual()
+
+
+
+.. seq:function:: seq_palign_global()
+
+
+
+.. seq:function:: seq_palign_default()
+
+
+
+.. seq:function:: omp_get_num_threads()
+
+
+
+.. seq:function:: omp_get_thread_num()
+
+
+
+.. seq:function:: omp_get_max_threads()
+
+
+
+.. seq:function:: omp_get_num_procs()
+
+
+
+
+

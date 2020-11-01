@@ -1,0 +1,21 @@
+.. seq:module:: core.float
+
+:seq:mod:`core.float`
+---------------------
+
+Source code: `core/float.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/float.seq>`_
+
+.. seq:extension:: float
+
+   **Magic methods:**
+
+      .. seq:method:: __init__(s : str)
+         :noindex:
+
+      .. seq:method:: __hash__()
+         :noindex:
+
+
+
+
+

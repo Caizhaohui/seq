@@ -1,0 +1,13 @@
+.. seq:module:: core.box
+
+:seq:mod:`core.box`
+-------------------
+
+Source code: `core/box.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/box.seq>`_
+
+.. seq:class:: Box[T]
+
+
+
+
+

@@ -1,0 +1,9 @@
+.. seq:module:: core.collections.khash
+
+:seq:mod:`core.collections.khash`
+---------------------------------
+
+Source code: `core/collections/khash.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/collections/khash.seq>`_
+
+
+

@@ -1,0 +1,171 @@
+.. seq:module:: ..itertools
+
+:seq:mod:`..itertools`
+----------------------
+
+Source code: `itertools.seq <https://github.com/seq-lang/seq/blob/master/stdlib/./itertools.seq>`_
+
+.. seq:function:: combinations[T](pool : generator[T], r : int)
+
+   
+       Return successive r-length combinations of elements in the iterable.
+   
+       combinations(range(4), 3) --> (0,1,2), (0,1,3), (0,2,3), (1,2,3)
+   
+
+
+
+.. seq:function:: combinations_with_replacement[T](pool : generator[T], r : int)
+
+   
+       Return successive r-length combinations of elements in the iterable
+       allowing individual elements to have successive repeats.
+   
+
+
+
+.. seq:function:: islice[T](iterable : generator[T], start : int, stop : int, step : int)
+
+   
+       Make an iterator that returns selected elements from the iterable.
+   
+       unlike python, seq requires start, stop and step for now.
+       default: start = 0, stop = len(iterable), step = 1
+   
+
+
+
+.. seq:function:: count(start : float, step : float)
+
+   
+       Return a count object whose __next__ method returns consecutive values.
+       default: start = 0.0, step = 1.0
+   
+
+
+
+.. seq:function:: repeat(object, times : int)
+
+   
+   
+       default for times = None, for now seq will use -1
+   
+
+
+
+.. seq:function:: cycle[T](iterable : generator[T])
+
+   
+       fixed
+   
+
+
+
+.. seq:function:: compress(data, selectors)
+
+   
+       Return data elements corresponding to true selector elements.
+   
+       Forms a shorter iterator from selected data elements using the selectors to
+       choose the data elements.
+   
+
+
+
+.. seq:function:: dropwhile(predicate, iterable)
+
+   
+       Drop items from the iterable while predicate(item) is true.
+   
+       Afterwards, return every element until the iterable is exhausted.
+   
+
+
+
+.. seq:function:: takewhile(predicate, iterable)
+
+   
+       Return successive entries from an iterable as long as the predicate evaluates to true for each entry.
+   
+
+
+
+.. seq:function:: filterfalse(predicate, iterable)
+
+   
+       Return those items of iterable for which function(item) is false.
+   
+       Unlike python, seq will not allow predicate to equal None for now.
+           if predicate is None:
+               predicate = bool
+   
+
+
+
+.. seq:function:: permutations[T](pool : generator[T], r : optional[int] = None)
+
+   
+       Return successive r-length permutations of elements in the iterable.
+   
+
+
+
+.. seq:function:: accumulate(iterable, func, initial)
+
+   
+       Return series of accumulated sums (or other binary function results).
+   
+       Default: func = operator.add, initial = None.
+       For now seq will assume initial is None.
+   
+
+
+
+.. seq:function:: chain(iterables)
+
+   
+       For now chain() == chain.from_iterable()
+   
+
+
+
+.. seq:function:: starmap(function, iterable)
+
+   
+       Return an iterator whose values are returned from the function
+       evaluated with an argument tuple taken from the given sequence.
+   
+
+
+
+.. seq:function:: groupby[K, V](iterable : generator[V], key : optional[function[K, V]] = None)
+
+   
+       make an iterator that returns consecutive keys and groups from the iterable
+   
+       iterable:
+           Elements to divide into groups according to the key function.
+       key:
+           A function for computing the group category for each element.
+           If the key function is not specified or is None, the element itself
+           is used for grouping.
+   
+       Deals with only strings for now.
+   
+
+
+
+.. seq:function:: zip_longest[T](a : generator[T], b : generator[T], fillvalue : T)
+
+
+
+.. seq:function:: product(a, b, equals_ok : bool = True)
+
+   
+       Return a Cartesian product of a and b.
+   
+
+
+
+
+

@@ -1,0 +1,1407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Language Primer &mdash; Seq 0.9.10 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Set-up" href="setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #333131" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Seq
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#install">Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#pre-built-binaries">Pre-built binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#building-from-source">Building from source</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Set-up</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#creating-a-stand-alone-executable">Creating a stand-alone executable</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Language Primer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#literals">Literals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tuples">Tuples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#containers">Containers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#assignments-and-operators">Assignments and operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tuple-unpacking">Tuple unpacking</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#control-flow">Control flow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conditionals">Conditionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loops">Loops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comprehensions">Comprehensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exception-handling">Exception handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#variables-and-scoping">Variables and scoping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#imports">Imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generics">Generics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generators">Generators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pipes">Pipes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#foreign-function-interface-ffi">Foreign function interface (FFI)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#classes-and-types">Classes and types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#type-extensions">Type extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magic-methods">Magic methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html#limitations-and-key-differences-with-python">Limitations and key differences with Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html#types">Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html#genomics-specific-features">Genomics-specific features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#genomic-types">Genomic types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#sequence-matching">Sequence matching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#pipelines">Pipelines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#sequence-alignment">Sequence alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#genomic-index-prefetching">Genomic index prefetching</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html#other-features">Other features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#parallelism">Parallelism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#type-extensions">Type extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#other-types">Other types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial.html#c-c-and-python-interoperability">C/C++ and Python interoperability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html#calling-bwa-from-seq">Calling BWA from Seq</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workshop.html">Workshop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#section-1-reading-sequences-from-disk">Section 1: Reading sequences from disk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#full-code-listing">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#section-2-building-an-index">Section 2: Building an index</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#id1">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#section-3-finding-k-mer-matches">Section 3: Finding k-mer matches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#id2">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#section-4-smith-waterman-alignment-and-cigar-strings">Section 4: Smith-Waterman alignment and CIGAR strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#id3">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#section-5-pipelines">Section 5: Pipelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#optional-parallelism">(Optional) Parallelism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#id4">Full code listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="workshop.html#section-6-domain-specific-optimizations">Section 6: Domain-specific optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="workshop.html#id5">Full code listing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#subsequence-extraction">Subsequence extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#k-mer-extraction">k-mer extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#reverse-complementation">Reverse complementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#k-mer-hamming-distance">k-mer Hamming distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#k-mer-hamming-neighbors">k-mer Hamming neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#k-mer-minimizer">k-mer minimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#de-bruijn-edge">de Bruijn edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#count-bases">Count bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#spaced-seed-search">Spaced seed search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#reverse-complement-palindrome">Reverse-complement palindrome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#sequence-alignment">Sequence alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#reading-fasta-fastq">Reading FASTA/FASTQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#reading-paired-end-fastq">Reading paired-end FASTQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#parallel-fastq-processing">Parallel FASTQ processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#reading-sam-bam-cram">Reading SAM/BAM/CRAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#dna-to-protein-translation">DNA to protein translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook.html#reading-protein-sequences-from-fasta">Reading protein sequences from FASTA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Calling Python from Seq</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#pyimport"><code class="docutils literal notranslate"><span class="pre">pyimport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#pydef"><code class="docutils literal notranslate"><span class="pre">pydef</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../embed.html">Calling Seq from C/C++</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../embed.html#converting-types">Converting types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html">Building from Source</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build.html#platform-independent-notes">Platform-independent notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build.html#macos">macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build.html#ubuntu-debian">Ubuntu/Debian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build.html#centos-rhel">CentOS/RHEL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build.html#opam-setup">OPAM setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../build.html#building">Building</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build.html#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/index.html">Standard Library Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/algorithms/index.html">algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/algorithms/heapsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.heapsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/algorithms/insertionsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.insertionsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/algorithms/pdqsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.pdqsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/algorithms/qsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.qsort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/algorithms/strings.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.strings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/algorithms/timsort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">algorithms.timsort</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/bio/index.html">bio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/align.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/bam.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bam</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/bed.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/block.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.block</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/builtin.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.builtin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/bwa.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bwa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/bwt.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.bwt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/c_htslib.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.c_htslib</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/fai.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fai</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/fasta.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fasta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/fastq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fastq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/fmindex.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.fmindex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/intervals.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.intervals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/iter.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.iter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/locus.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.locus</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/pseq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.pseq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/seq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.seq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/bio/vcf.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bio.vcf</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/bisect.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/core/index.html">core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/aliases.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.aliases</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/box.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.box</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/builtin.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.builtin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/c_stubs.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.c_stubs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/collections/index.html">core.collections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stdlib/core/collections/dict.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.dict</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdlib/core/collections/khash.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.khash</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdlib/core/collections/list.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdlib/core/collections/set.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.collections.set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/dlopen.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.dlopen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/err.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/file.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/float.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/gc.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.gc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/int.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.int</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/optional.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.optional</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/python.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.python</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/range.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.range</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/slice.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.slice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/sort.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.sort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/core/str.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">core.str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/getopt.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">getopt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/gzip.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">gzip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/heapq.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">heapq</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/itertools.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">math</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/os/index.html">os</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../stdlib/os/path.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">os.path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/pickle.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">pickle</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/python.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">python</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/random.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sortedlist.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">sortedlist</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/statistics.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/string.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">string</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sys.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">sys</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/threading.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">threading</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/time.html"><code class="xref seq seq-mod docutils literal notranslate"><span class="pre">time</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Seq</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Language Primer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/primer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="language-primer">
+<h1>Language Primer<a class="headerlink" href="#language-primer" title="Permalink to this headline">¶</a></h1>
+<p>If you know Python, you already know 95% of Seq. The following primer
+assumes some familiarity with Python or at least one “modern”
+programming language (QBASIC doesn’t count).</p>
+<div class="section" id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seq comments start with &quot;# &#39;and go till the end of the line</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">There are no multi-line comments. You can (ab)use docstring operator (&#39;&#39;&#39;)</span>
+<span class="sd">if you really need them.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="literals">
+<h2>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h2>
+<p>Seq is a strongly typed language like C++, Java or C#. That means each
+expression must have a type that can be inferred at the compile-time.</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="c1"># Booleans</span>
+<span class="kc">True</span>  <span class="c1"># type: bool</span>
+<span class="kc">False</span>
+
+<span class="c1"># Numbers</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># type: int. It&#39;s 64-bit signed integer.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.12</span>  <span class="c1"># type: float. Seq&#39;s float is identical to C&#39;s double.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">5</span><span class="n">u</span>  <span class="c1"># type: int, but unsigned</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">Int</span><span class="p">[</span><span class="mi">8</span><span class="p">](</span><span class="mi">12</span><span class="p">)</span>  <span class="c1"># 8-bit signed integer; you can go all the way to Int[2048]</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">Int</span><span class="p">[</span><span class="mi">8</span><span class="p">](</span><span class="mi">200</span><span class="p">)</span>  <span class="c1"># 8-bit unsigned integer</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">byte</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># a byte is C&#39;s char; equivalent to Int[8]</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="mh">0x12AF</span>  <span class="c1"># hexadecimal integers are also welcome</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mh">0XAF12</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">3.11e+9</span>  <span class="c1"># scientific notation is also supported</span>
+<span class="n">g</span> <span class="o">=</span> <span class="o">.</span><span class="mi">223</span>  <span class="c1"># and this is also float</span>
+<span class="n">g</span> <span class="o">=</span> <span class="o">.</span><span class="mf">11E-1</span>  <span class="c1"># and this as well</span>
+
+<span class="c1"># Strings</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello! &quot;^_^&quot; &#39;</span>  <span class="c1"># type: str.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;hello there! </span><span class="se">\t</span><span class="s2"> </span><span class="se">\\</span><span class="s2"> &#39;^_^&#39; &quot;</span>  <span class="c1"># \t is a tab character; \\ stands for \</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;hello\n&quot;</span>  <span class="c1"># raw strings do not escape slashes; this would print &quot;hello\n&quot;</span>
+<span class="n">fstr</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;a is {a + 1}&quot;</span>  <span class="c1"># an F-string; prints &quot;a is 2&quot;</span>
+<span class="n">fstr</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;hi! {a+1=}&quot;</span>  <span class="c1"># an F-string; prints &quot;hi! a+1=2&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">hello!</span>
+<span class="s2">multiline string</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># The following escape sequences are supported:</span>
+<span class="c1">#   \\, \&#39;, \&quot;, \a, \b, \f, \n, \r, \t, \v,</span>
+<span class="c1">#   \xHHH (HHH is hex code), \OOO (OOO is octal code)</span>
+
+<span class="c1"># Sequence types</span>
+<span class="n">dna</span> <span class="o">=</span> <span class="sa">s</span><span class="s2">&quot;ACGT&quot;</span>  <span class="c1"># type: seq. These are DNA sequences.</span>
+<span class="n">prt</span> <span class="o">=</span> <span class="sa">p</span><span class="s2">&quot;MYX&quot;</span>  <span class="c1"># type: bio.pseq. These are protein sequences.</span>
+<span class="n">kmer</span> <span class="o">=</span> <span class="sa">k</span><span class="s2">&quot;ACGT&quot;</span>  <span class="c1"># type: Kmer[4]. Note that Kmer[5] is different than Kmer[12].</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">Seq</span></code> happily parses <code class="docutils literal notranslate"><span class="pre">None</span></code> literals, it probably
+does not stand for what you might expected (it is currently used
+as C++’s equivalent of <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> for reference types). The next
+major release of Seq will unify <code class="docutils literal notranslate"><span class="pre">None</span></code> with all other types via
+implicit optional types, making their use much more similar to that
+in Python.</p>
+</div>
+<div class="section" id="tuples">
+<h3>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tuples</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">)</span>  <span class="c1"># type: tuple[int, float, str].</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># type: float</span>
+<span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">)</span>  <span class="c1"># type: tuple[int]</span>
+</pre></div>
+</div>
+<p>As all types must be known at the compile time, tuple indexing works
+only if a tuple is homogenous (all types are the same) or if the value
+of the index is known at compile-time.</p>
+<p>For the same reasons, you can only iterate over a homogenous tuple.</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># works because 1 is a constant int</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">t</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>  <span class="c1"># compile error: x is not known at the compile time</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>  <span class="c1"># compile error: tuple is heterogenous</span>
+    <span class="k">print</span> <span class="n">i</span>
+
+<span class="c1"># This is a homogenous tuple (all member types are the same)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># type: tuple[int, int, int].</span>
+<span class="n">u</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>  <span class="c1"># works because tuple members share the same type regardless of x</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">u</span><span class="p">:</span>  <span class="c1"># works</span>
+    <span class="k">print</span> <span class="n">i</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tuples are <strong>immutable</strong>. <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">(1,</span> <span class="pre">2);</span> <span class="pre">a[1]</span> <span class="pre">=</span> <span class="pre">1</span></code> will not
+compile.</p>
+</div>
+</div>
+<div class="section" id="containers">
+<h3>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  <span class="c1"># type: list[int]; a list of integers</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">}</span>  <span class="c1"># type: set[float]; a set of integers</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;ola&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;zdravo&#39;</span><span class="p">}</span>  <span class="c1"># type: dict[int, str]; a simple dictionary</span>
+
+<span class="n">ln</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]()</span>  <span class="c1"># an empty list</span>
+<span class="n">ln</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># compiler error; this does not (yet) work due to unknown list type</span>
+<span class="n">dn</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]()</span>  <span class="c1"># an empty dictionary; {} does not (yet) work</span>
+</pre></div>
+</div>
+<p>Because Seq is strongly typed, these won’t compile:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">]</span>  <span class="c1"># is it a list[int] or list[str]? you cannot mix-and-match types</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+<span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># d is a dict[int, str]; 3 is clearly not a string.</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># compiler error: t is not heterogenous</span>
+
+<span class="n">lp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>  <span class="c1"># compile error: Seq will not automatically cast an int to a float</span>
+</pre></div>
+</div>
+<p>This will work, though:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">u</span><span class="p">)</span>  <span class="c1"># works: u is homogenous</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dictionaries and sets are unordered and are based on
+<a class="reference external" href="https://github.com/attractivechaos/klib">klib</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="assignments-and-operators">
+<span id="operators"></span><h2>Assignments and operators<a class="headerlink" href="#assignments-and-operators" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>  <span class="c1"># this is 3</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span><span class="fm">__add__</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># you can use a function call instead of an operator; this is also 3</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># this is equivalent to the previous line</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mf">2.0</span>  <span class="c1"># this is 2.5</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># this is 2; // is an integer division</span>
+<span class="n">a</span> <span class="o">*=</span> <span class="mi">2</span>  <span class="c1"># a is now 6</span>
+</pre></div>
+</div>
+<p>This is the list of binary operators and their magic methods:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 22%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Magic method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__add__</span></code></p></td>
+<td><p>addition</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__sub__</span></code></p></td>
+<td><p>subtraction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__mul__</span></code></p></td>
+<td><p>multiplication</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__truediv__</span></code></p></td>
+<td><p>float division</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__div__</span></code></p></td>
+<td><p>integer division</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__pow__</span></code></p></td>
+<td><p>exponentiation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__mod__</span></code></p></td>
+<td><p>modulo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&#64;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__matmul__</span></code></p></td>
+<td><dl class="simple">
+<dt>matrix multiplication;</dt><dd><p>sequence alignment</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__and__</span></code></p></td>
+<td><p>bitwise and</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__or__</span></code></p></td>
+<td><p>bitwise or</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__xor__</span></code></p></td>
+<td><p>bitwise xor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__lshift__</span></code></p></td>
+<td><p>left bit shift</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rshift__</span></code></p></td>
+<td><p>right bit shift</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__lt__</span></code></p></td>
+<td><p>less than</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__le__</span></code></p></td>
+<td><p>less or equal than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__gt__</span></code></p></td>
+<td><p>greater than</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__ge__</span></code></p></td>
+<td><p>greater or equal than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__eq__</span></code></p></td>
+<td><p>equal to</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">!=</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__ne__</span></code></p></td>
+<td><p>not equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">in</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__contains__</span></code></p></td>
+<td><p>belongs to</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p>none</p></td>
+<td><p>boolean and (short-circuits)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p>none</p></td>
+<td><p>boolean or (short-circuits)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Seq also has the following unary operators:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 28%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Magic method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__invert__</span></code></p></td>
+<td><dl class="simple">
+<dt>bitwise inversion;</dt><dd><p>reverse complement;
+<code class="docutils literal notranslate"><span class="pre">optional[T]</span></code> unpacking</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__pos__</span></code></p></td>
+<td><p>unary positive</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__neg__</span></code></p></td>
+<td><p>unary negation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p>none</p></td>
+<td><p>boolean negation</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tuple-unpacking">
+<h3>Tuple unpacking<a class="headerlink" href="#tuple-unpacking" title="Permalink to this headline">¶</a></h3>
+<p>Seq supports most of the Python’s tuple unpacking syntax:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>  <span class="c1"># x is 1, y is 2</span>
+<span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># x is 1, y is 2, z is 3</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># x is 1, y is 2, z is 3</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>  <span class="c1"># l is [1, 2, 3, 4, 5, 6, 7]</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">mid</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">l</span>  <span class="c1"># a is 1, b is 2, mid is [3, 4, 5, 6], c is 7</span>
+<span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">end</span> <span class="o">=</span> <span class="n">l</span>  <span class="c1"># a is 1, end is [2, 3, 4, 5, 6, 7]</span>
+<span class="o">*</span><span class="n">beg</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">l</span>  <span class="c1"># c is 7, beg is [1, 2, 3, 4, 5, 6]</span>
+<span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="p">)</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># x is [0, 1, 2]</span>
+<span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># error: this does not work</span>
+
+<span class="o">*</span><span class="n">sth</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># sth is (1, 2), a is 3, b is 4</span>
+<span class="o">*</span><span class="n">sth</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># error: this only works on homogenous tuples for now</span>
+
+<span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="o">*</span><span class="n">pff</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;this&#39;</span>
+<span class="k">print</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pff</span><span class="p">,</span> <span class="n">z</span> <span class="c1"># x is 1, y is 2, pff is an empty tuple --- () ---, and z is &quot;this&quot;</span>
+
+<span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="s1">&#39;XYZ&#39;</span>  <span class="c1"># works on strings as well; s is &quot;X&quot; and q is &quot;YZ&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="control-flow">
+<h2>Control flow<a class="headerlink" href="#control-flow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conditionals">
+<h3>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h3>
+<p>Seq supports the standard Python conditional syntax:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">a</span> <span class="ow">or</span> <span class="n">b</span> <span class="ow">or</span> <span class="n">some_cond</span><span class="p">():</span>
+    <span class="k">print</span> <span class="mi">1</span>
+<span class="k">elif</span> <span class="n">whatever</span><span class="p">()</span> <span class="ow">or</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># oh yes, we do support chained comparisons</span>
+    <span class="k">print</span> <span class="s1">&#39;meh...&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s1">&#39;lo and behold!&#39;</span>
+
+<span class="k">if</span> <span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">()</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="k">if</span> <span class="n">sth</span><span class="p">()</span> <span class="k">else</span> <span class="n">c</span>  <span class="c1"># ternary conditional operator</span>
+</pre></div>
+</div>
+<p>But lo and behold! Seq extends the Python conditional syntax with a
+<code class="docutils literal notranslate"><span class="pre">match</span></code> statement, which is inspired by Rust’s <code class="docutils literal notranslate"><span class="pre">match</span></code> statement
+(and luckily not by C’s <code class="docutils literal notranslate"><span class="pre">switch</span></code>):</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">a</span> <span class="o">+</span> <span class="n">some_heavy_expr</span><span class="p">():</span>  <span class="c1"># assuming that the type of this expression is int</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># is it 1?</span>
+        <span class="k">print</span> <span class="s1">&#39;hi&#39;</span>
+    <span class="k">case</span> <span class="mi">2</span> <span class="o">...</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># is it 2, 3, 4, 5, 6, 7, 8, 9 or 10?</span>
+        <span class="k">print</span> <span class="s1">&#39;wow!&#39;</span>
+    <span class="k">case</span> <span class="n">_</span><span class="p">:</span>  <span class="c1"># &quot;default&quot; case</span>
+        <span class="k">print</span> <span class="s1">&#39;meh...&#39;</span>
+
+<span class="k">match</span> <span class="n">bool_expr</span><span class="p">():</span>  <span class="c1"># now it&#39;s a bool expression</span>
+    <span class="k">case</span> <span class="kc">True</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">case</span> <span class="kc">False</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="k">match</span> <span class="n">str_expr</span><span class="p">():</span>  <span class="c1"># now it&#39;s a str expression</span>
+    <span class="k">case</span> <span class="s1">&#39;abc&#39;</span><span class="p">:</span> <span class="k">print</span> <span class="s2">&quot;it&#39;s ABC time!&quot;</span>
+    <span class="k">case</span> <span class="s1">&#39;def&#39;</span> <span class="ow">or</span> <span class="s1">&#39;ghi&#39;</span><span class="p">:</span>  <span class="c1"># you can chain multiple rules with &quot;or&quot; operator</span>
+        <span class="k">print</span> <span class="s2">&quot;it&#39;s not ABC time!&quot;</span>
+    <span class="k">case</span> <span class="n">s</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span> <span class="k">print</span> <span class="s2">&quot;so looong!&quot;</span>  <span class="c1"># conditional match expression</span>
+    <span class="k">case</span> <span class="n">_</span><span class="p">:</span> <span class="k">assert</span> <span class="kc">False</span>
+
+<span class="k">match</span> <span class="n">some_tuple</span><span class="p">:</span>  <span class="c1"># assuming typeof(some_tuple) is tuple[int, int]</span>
+    <span class="k">case</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="o">...</span>
+    <span class="k">case</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">42</span><span class="p">:</span>  <span class="c1"># you can do away with useless terms with an underscore</span>
+        <span class="k">print</span> <span class="s1">&#39;hitchhiker!&quot;</span>
+    <span class="k">case</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span> <span class="o">...</span> <span class="mi">100</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">10</span> <span class="o">...</span> <span class="mi">20</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># you can nest match expressions</span>
+        <span class="k">print</span> <span class="s1">&#39;cooomplex!&#39;</span>
+
+<span class="k">match</span> <span class="n">list_foo</span><span class="p">():</span>
+    <span class="k">case</span> <span class="p">[]:</span>  <span class="c1"># [] actually works here</span>
+        <span class="o">...</span>
+    <span class="k">case</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>  <span class="c1"># make sure that list_foo() returns list[int] though!</span>
+        <span class="o">...</span>
+    <span class="k">case</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>  <span class="c1"># matches any list that starts with 1 and 2 and ends with 5</span>
+        <span class="o">...</span>
+    <span class="k">case</span> <span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="ow">or</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>  <span class="c1"># matches a list that starts or ends with 6</span>
+        <span class="o">...</span>
+    <span class="k">case</span> <span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">w</span><span class="p">]</span> <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># matches a list that ends with a negative integer</span>
+        <span class="o">...</span>
+    <span class="k">case</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="k">as</span> <span class="n">l</span><span class="p">:</span>  <span class="c1"># any other list; binds variable l to it</span>
+        <span class="k">print</span> <span class="n">l</span>
+
+<span class="k">match</span> <span class="n">sequence</span><span class="p">:</span>  <span class="c1"># of type seq</span>
+    <span class="k">case</span> <span class="sa">s</span><span class="s1">&#39;ACGT&#39;</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">case</span> <span class="sa">s</span><span class="s1">&#39;AC_T&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># _ is a wildcard character and it can be anything</span>
+    <span class="k">case</span> <span class="sa">s</span><span class="s1">&#39;A_C_T_&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># a spaced k-mer AxCxTx</span>
+    <span class="k">case</span> <span class="sa">s</span><span class="s1">&#39;AC...T&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># matches a sequence that starts with AC and ends with T</span>
+</pre></div>
+</div>
+<p>You can mix, match and chain match rules as long as the match type
+matches the expression type.</p>
+</div>
+<div class="section" id="loops">
+<h3>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h3>
+<p>Standard fare:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># prints even numbers from 9 to 1</span>
+    <span class="n">a</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">print</span> <span class="n">a</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>  <span class="c1"># prints numbers from 0 to 7, inclusive</span>
+    <span class="k">print</span> <span class="n">i</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span> <span class="k">break</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code> construct can iterate over any generator, which means any object
+that implements the <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> magic method. In practice, generators,
+lists, sets, dictionaries, homogenous tuples, ranges and many more types
+implement this method, so you don’t need to worry. If you need to
+implement one yourself, just keep in mind that <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> is a
+generator and not a function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Seq does not support <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">...</span> <span class="pre">else</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">...</span> <span class="pre">else</span></code>
+constructs. We’re pretty confident nobody is going to miss those. Let
+us know if you do!</p>
+</div>
+</div>
+<div class="section" id="comprehensions">
+<h3>Comprehensions<a class="headerlink" href="#comprehensions" title="Permalink to this headline">¶</a></h3>
+<p>Technically, comprehensions are not statements (they are expressions).
+Comprehensions are a nifty, Pythonic way to create collections:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>  <span class="c1"># type: list[int]; l is [0, 1, 2, 3, 4]</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>  <span class="c1"># type: list[int]; l is [11, 13]</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">]</span>  <span class="c1"># l is [0, 1, 4, 9, 16]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>  <span class="c1"># s is {0, 1, 2, 3, 4}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;item {i+1}&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)}</span>  <span class="c1"># d is {0: &quot;item 1&quot;, 1: &quot;item 2&quot;, 2: &quot;item 3&quot;}</span>
+</pre></div>
+</div>
+<p>You can also use collections to create generators (more about them later
+on):</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># prints number from 0 to 9, inclusive</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>  <span class="c1"># this code right now crashes because g is already exhausted!</span>
+    <span class="k">print</span> <span class="n">i</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If a generator is exhausted, a segmentation fault can be produced.
+This behavior will be changed later by raising an exception instead;
+in the meantime, be sure not to re-use exhausted generators.</p>
+</div>
+</div>
+<div class="section" id="exception-handling">
+<h3>Exception handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">¶</a></h3>
+<p>Again, if you know how to do this in Python, you know how to do it in
+Seq:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">throwable</span><span class="p">():</span>
+     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;doom and gloom&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">throwable</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;we caught the exception&quot;</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;ouch, we&#39;re in a deep trouble&quot;</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;whatever, it&#39;s done&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Right now, Seq cannot catch multiple exceptions in one
+statement. Thus <code class="docutils literal notranslate"><span class="pre">catch</span> <span class="pre">(Exc1,</span> <span class="pre">Exc2,</span> <span class="pre">Exc3)</span> <span class="pre">as</span> <span class="pre">var</span></code> will not compile.</p>
+</div>
+<p>If you have an object that implements <code class="docutils literal notranslate"><span class="pre">__enter__</span></code> and <code class="docutils literal notranslate"><span class="pre">__exit__</span></code>
+methods to manage its lifetime (say, a <code class="docutils literal notranslate"><span class="pre">File</span></code>), you can use a <code class="docutils literal notranslate"><span class="pre">with</span></code>
+statement to make your life easy:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;foo.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;foo_copy.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="variables-and-scoping">
+<h2>Variables and scoping<a class="headerlink" href="#variables-and-scoping" title="Permalink to this headline">¶</a></h2>
+<p>You have probably noticed by now that blocks in Seq are defined by their
+indentation level (as in Python). We recommend using 2 or 4 spaces to
+indent blocks. Do not mix indentation levels, and do not mix tabs and spaces;
+stick to any <em>consistent</em> way of indenting your code.</p>
+<p>One of the major differences between Seq and Python lies in their variable
+scoping rules. Seq variables cannot <em>leak</em> to outer blocks. Every
+variable is accessible only within its own block (after the variable is
+defined, of course), and within any block that is nested within the
+variable’s own block.</p>
+<p>That means that the following Pythonic pattern won’t compile:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">cond</span><span class="p">():</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span> <span class="n">x</span>  <span class="c1"># x is defined separately in if/else blocks; it is not accessible here!</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+     <span class="o">...</span>
+<span class="k">print</span> <span class="n">i</span>  <span class="c1"># error: i is only accessible within the for loop block</span>
+</pre></div>
+</div>
+<p>In Seq, you can rewrite that as:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">if</span> <span class="n">cond</span><span class="p">():</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># or even better</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">cond</span><span class="p">()</span> <span class="k">else</span> <span class="mi">2</span>
+
+<span class="k">print</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Another important difference between Seq and Python is that, in Seq, variables
+cannot change types. So this won’t compile:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># error: expected string, but got int</span>
+</pre></div>
+</div>
+<p>A note about function scoping: functions cannot modify variables that
+are not defined within the function block. You need to use <code class="docutils literal notranslate"><span class="pre">global</span></code> to
+modify such variables:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+     <span class="k">print</span> <span class="n">g</span>
+<span class="n">foo</span><span class="p">()</span>  <span class="c1"># works, prints 5</span>
+
+<span class="k">def</span> <span class="nf">foo2</span><span class="p">():</span>
+     <span class="n">g</span> <span class="o">+=</span> <span class="mi">2</span>  <span class="c1"># error: cannot access g</span>
+     <span class="k">print</span> <span class="n">g</span>
+
+<span class="k">def</span> <span class="nf">foo3</span><span class="p">():</span>
+     <span class="k">global</span> <span class="n">g</span>
+     <span class="n">g</span> <span class="o">+=</span> <span class="mi">2</span>
+     <span class="k">print</span> <span class="n">g</span>
+<span class="n">foo3</span><span class="p">()</span>  <span class="c1"># works, prints 7</span>
+<span class="n">foo3</span><span class="p">()</span>  <span class="c1"># works, prints 9</span>
+</pre></div>
+</div>
+<p>As a rule, use <code class="docutils literal notranslate"><span class="pre">global</span></code> whenever you are need to access variables that
+are not defined within the function.</p>
+</div>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>You can import functions and classes from another Seq module by doing:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create foo.seq with a bunch of useful methods</span>
+<span class="kn">import</span> <span class="nn">foo</span>
+
+<span class="n">foo</span><span class="o">.</span><span class="n">useful1</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">Type</span><span class="p">()</span>
+
+<span class="c1"># Create bar.seq with a bunch of useful methods</span>
+<span class="kn">from</span> <span class="nn">bar</span> <span class="k">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+<span class="n">x</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">bar</span> <span class="k">import</span> <span class="n">z</span> <span class="k">as</span> <span class="n">bar_z</span>
+<span class="n">bar_z</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">foo</span></code> looks for <code class="docutils literal notranslate"><span class="pre">foo.seq</span></code> or <code class="docutils literal notranslate"><span class="pre">foo/__init__.seq</span></code> in the
+current directory.</p>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>Functions are defined as follows:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+<span class="k">print</span> <span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># prints 5</span>
+</pre></div>
+</div>
+<p>How about procedures? Well, don’t return anything meaningful:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">proc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;followed by&#39;</span><span class="p">,</span> <span class="n">b</span>
+<span class="n">proc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">proc2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;followed by&#39;</span><span class="p">,</span> <span class="n">b</span>
+<span class="n">proc2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">proc2</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>  <span class="c1"># this prints nothing</span>
+</pre></div>
+</div>
+<p>Seq is a strongly-typed language, so you can restrict argument and
+return types:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c1"># this works because int implements __add__(float)</span>
+<span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>  <span class="c1"># 3.2</span>
+<span class="n">fn</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># error: 1.1. is not an int</span>
+
+<span class="k">def</span> <span class="nf">fn2</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<span class="n">fn2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># -1</span>
+<span class="n">fn2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>  <span class="c1"># -0.1; works because int implements __sub__(float)</span>
+<span class="n">fn2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>  <span class="c1"># error: there is no int.__sub__(str)!</span>
+
+<span class="k">def</span> <span class="nf">fn3</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">fn3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># works, as 1 + 2 is integer</span>
+<span class="n">fn3</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">)</span>  <span class="c1"># error: &#39;s&#39;+&#39;u&#39; returns &#39;su&#39; which is str,</span>
+               <span class="c1"># but the signature indicates that it must return int</span>
+</pre></div>
+</div>
+<p>Default arguments? Named arguments? You bet:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;hi&#39;</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># prints &quot;1 2 1.0 hi&quot;</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># prints &quot;1 1 1.0 foo&quot;</span>
+</pre></div>
+</div>
+<p>How about optional arguments? Currently you have to use this:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># operator ~ &quot;unpacks&quot; the optional value only if the optional is not None</span>
+    <span class="n">bx</span> <span class="o">=</span> <span class="o">~</span><span class="n">b</span> <span class="k">if</span> <span class="n">b</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="c1"># WARNING: unpacking None can lead to a segmentation fault</span>
+    <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="n">bx</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># prints &quot;1 0&quot;</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># prints &quot;1 2&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="generics">
+<h3>Generics<a class="headerlink" href="#generics" title="Permalink to this headline">¶</a></h3>
+<p>As we’ve said several times: Seq is a strongly typed language. As
+such, it is not as flexible as Python when it comes to types (e.g. you
+can’t have lists with elements of different types). However,
+Seq tries to mimic Python’s <em>“I don’t care about types until I do”</em>
+attitude as much as possible by utilizing a technique known as
+<em>compile-time generics</em>. If there is a function that has an argument
+without a type definition, Seq will consider it a <em>generic</em> function,
+and will generate different functions for each invocation of
+that generic function:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">x</span>  <span class="c1"># print relies on typeof(x).__str__(x) method to print the representation of x</span>
+<span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Seq automatically generates foo(x: int) and calls int.__str__ when needed</span>
+<span class="n">x</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>  <span class="c1"># Seq automatically generates foo(x: str) and calls str.__str__ when needed</span>
+<span class="n">x</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>  <span class="c1"># Seq automatically generates foo(x: list[int]) and calls list[int].__str__ when needed</span>
+</pre></div>
+</div>
+<p>But what if you need to mix type definitions and generic types? Say, your
+function can take a list of <em>anything</em>? Well, you can use generic
+specifiers:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="k">print</span> <span class="n">x</span>
+<span class="n">foo</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>  <span class="c1"># prints [1, 2]</span>
+<span class="n">foo</span><span class="p">([</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">])</span>  <span class="c1"># prints [s, u]</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># error: 5 is not a list!</span>
+<span class="n">foo</span><span class="p">[</span><span class="nb">int</span><span class="p">]([</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">])</span>  <span class="c1"># fails: T is int, so foo expects list[int] but it got list[str]</span>
+
+<span class="k">def</span> <span class="nf">foo</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="mi">1</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># prints 4, returns 1</span>
+<span class="n">foo</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># error: return type is str, but foo returns int!</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Coming from C++? <code class="docutils literal notranslate"><span class="pre">foo[T,</span> <span class="pre">U](x:</span> <span class="pre">T)</span> <span class="pre">-&gt;</span> <span class="pre">U:</span> <span class="pre">...</span></code> is the same as
+<code class="docutils literal notranslate"><span class="pre">template&lt;typename</span> <span class="pre">T,</span> <span class="pre">typename</span> <span class="pre">U&gt;</span> <span class="pre">U</span> <span class="pre">foo(T</span> <span class="pre">x)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>.</p>
+</div>
+</div>
+<div class="section" id="generators">
+<h3>Generators<a class="headerlink" href="#generators" title="Permalink to this headline">¶</a></h3>
+<p>Seq supports generators, and they are fast! Really, really fast!</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">i</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">gen</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># prints [0, 1, ..., 9]</span>
+<span class="k">print</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">gen</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># prints []</span>
+</pre></div>
+</div>
+<p>Notice the type of <code class="docutils literal notranslate"><span class="pre">gen(0)</span></code> is <code class="docutils literal notranslate"><span class="pre">generator[int]</span></code>; however,
+you annotate the return type of generator with the type of value that
+you yield (<code class="docutils literal notranslate"><span class="pre">int</span></code> in this example).</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">yield</span></code> to implement coroutines: <code class="docutils literal notranslate"><span class="pre">yield</span></code>
+suspends the function, while <code class="docutils literal notranslate"><span class="pre">(yield)</span></code> (yes, parentheses are required)
+receives a value, as in Python.</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mysum</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">start</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="k">yield</span><span class="p">)</span>  <span class="c1"># receives the input of coroutine.send() call</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># exits the coroutine</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="n">a</span>
+    <span class="k">yield</span> <span class="n">m</span>
+<span class="n">iadder</span> <span class="o">=</span> <span class="n">mysum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># assign a coroutine</span>
+<span class="n">next</span><span class="p">(</span><span class="n">iadder</span><span class="p">)</span>  <span class="c1"># activate it</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">iadder</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># send a value to coroutine</span>
+<span class="k">print</span><span class="p">(</span><span class="n">iadder</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># prints 45</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pipes">
+<h3>Pipes<a class="headerlink" href="#pipes" title="Permalink to this headline">¶</a></h3>
+<p>Seq extends the core Python language with a pipe operator, which is
+similar to bash pipes (or F#’s <code class="docutils literal notranslate"><span class="pre">|&gt;</span></code> operator). You can chain multiple
+functions and generators to form a pipeline:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="mi">2</span> <span class="o">|&gt;</span> <span class="n">add1</span>  <span class="c1"># 3; equivalent to add1(2)</span>
+
+<span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="mi">2</span> <span class="o">|&gt;</span> <span class="n">calc</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 11; equivalent to calc(2, 3)</span>
+<span class="mi">2</span> <span class="o">|&gt;</span> <span class="n">calc</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 11; equivalent to calc(2, 3)</span>
+<span class="mi">2</span> <span class="o">|&gt;</span> <span class="n">calc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>  <span class="c1"># 7; equivalent to calc(3, 2)</span>
+
+
+<span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">s</span>
+<span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">i</span>
+<span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">gen</span> <span class="o">|&gt;</span> <span class="n">echo</span>  <span class="c1"># prints 0, 1, 2, 3, 4</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">gen</span> <span class="o">|&gt;</span> <span class="n">echo</span>  <span class="c1"># prints (0), (0, 1), (0, 1, 2), (0, 1, 2, 3) without parentheses</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">|&gt;</span> <span class="n">echo</span>   <span class="c1"># prints 1, 2, 3</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">echo</span>  <span class="c1"># not only prints all those numbers, but it uses almost no memory at all</span>
+</pre></div>
+</div>
+<p>Seq will chain anything that implements <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>; however, use
+generators as much as possible because the compiler will optimize out
+generators whenever possible. Combinations of pipes and generators can be
+used to implement efficient streaming pipelines.</p>
+<p>Seq can also execute pipelines in parallel via the parallel pipe (<code class="docutils literal notranslate"><span class="pre">||&gt;</span></code>)
+operator:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span> <span class="o">||&gt;</span> <span class="n">echo</span>  <span class="c1"># prints all these numbers, probably in random order</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span> <span class="o">||&gt;</span> <span class="n">process</span> <span class="o">||&gt;</span> <span class="n">clean</span>  <span class="c1"># runs process in parallel, and then cleans data in parallel</span>
+</pre></div>
+</div>
+<p>In the last example, Seq will automatically schedule the <code class="docutils literal notranslate"><span class="pre">process</span></code> and
+<code class="docutils literal notranslate"><span class="pre">clean</span></code> functions to execute as soon as possible. You can control the
+number of threads via the <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code> environment variable.</p>
+</div>
+<div class="section" id="foreign-function-interface-ffi">
+<h3>Foreign function interface (FFI)<a class="headerlink" href="#foreign-function-interface-ffi" title="Permalink to this headline">¶</a></h3>
+<p>Seq can easily call functions from C and Python.</p>
+<p>Let’s import some C functions:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">cimport</span> <span class="nb">pow</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+<span class="nb">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># 4.0</span>
+
+<span class="c1"># Import and rename function</span>
+<span class="k">cimport</span> <span class="n">puts</span><span class="p">(</span><span class="n">cobj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">void</span> <span class="k">as</span> <span class="n">print_line</span>  <span class="c1"># type cobj is C&#39;s pointer (void*, char*, etc.)</span>
+<span class="n">print_line</span><span class="p">(</span><span class="s2">&quot;hi!&quot;</span><span class="o">.</span><span class="n">ptr</span><span class="p">)</span>  <span class="c1"># prints &quot;hi!&quot;.</span>
+                       <span class="c1"># Note .ptr at the end of string--- needed to cast Seq&#39;s string to char*.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cimport</span></code> only works if the symbol is available to the program. If you
+are running your programs via <code class="docutils literal notranslate"><span class="pre">seqc</span></code>, you can link dynamic libraries
+by running <code class="docutils literal notranslate"><span class="pre">seqc</span> <span class="pre">-l</span> <span class="pre">path/to/dynamic/library.so</span> <span class="pre">...</span></code>. Otherwise, link
+your libraries by passing them to the <code class="docutils literal notranslate"><span class="pre">clang</span></code>.</p>
+<p>Hate linking? You can also use dyld library loading as follows:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="n">LIBRARY</span> <span class="o">=</span> <span class="s2">&quot;mycoollib.so&quot;</span>
+<span class="kn">from</span> <span class="nn">LIBRARY</span> <span class="k">cimport</span> <span class="n">mymethod</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cobj</span>
+<span class="kn">from</span> <span class="nn">LIBRARY</span> <span class="k">cimport</span> <span class="n">myothermethod</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cobj</span> <span class="k">as</span> <span class="n">my2</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">mymethod</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>
+<span class="n">foo2</span> <span class="o">=</span> <span class="n">my2</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When loading a function via FFI, you must explicitly specify
+argument and return types.</p>
+</div>
+<p>How about Python? If you have set the <code class="docutils literal notranslate"><span class="pre">SEQ_PYTHON</span></code> environment variable as
+described in the first section, you can do:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">python</span>  <span class="c1"># needed for Python support</span>
+
+<span class="k">pyimport</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;hehe&quot;</span><span class="p">)</span>  <span class="c1"># prints 4 by passing &quot;hehe&quot; to python</span>
+</pre></div>
+</div>
+<p>Often you want to execute more complex Python code within Seq. To that
+end, you can use Seq’s <code class="docutils literal notranslate"><span class="pre">pydef</span></code> construct:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">python</span>
+<span class="k">pydef</span> <span class="n">scipy_here_i_come</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+    <span class="c1"># Code within this block is executed by the Python interpreter,</span>
+    <span class="c1"># and as such it must be valid Python code</span>
+    <span class="kn">import</span> <span class="nn">scipy.linalg</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">scipy_here_i_come</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>  <span class="c1"># [-0.372281, 5.37228] with some warnings...</span>
+</pre></div>
+</div>
+<p>Seq will automatically bridge any object that implements the <code class="docutils literal notranslate"><span class="pre">__to_py__</span></code>
+and <code class="docutils literal notranslate"><span class="pre">__from_py__</span></code> magic methods. All standard Seq types already
+implement these methods.</p>
+</div>
+</div>
+<div class="section" id="classes-and-types">
+<h2>Classes and types<a class="headerlink" href="#classes-and-types" title="Permalink to this headline">¶</a></h2>
+<p>Of course, Seq supports classes! However, you must declare class members
+and their types in the preamble of each class (like you would do with
+Python’s dataclasses).</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>  <span class="c1"># constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">):</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>  <span class="c1"># prints &quot;1 2&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Right now, you must annotate the type of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Seq does not (yet!) support inheritance and polymorphism.</p>
+</div>
+<p>Unlike Python, Seq supports method overloading <strong>only for magic
+methods</strong>:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>  <span class="c1"># constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>  <span class="c1"># another constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>  <span class="c1"># another constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">):</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+
+<span class="n">Foo</span><span class="p">()</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>  <span class="c1"># prints &quot;0 0&quot;</span>
+<span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>  <span class="c1"># prints &quot;1 2&quot;</span>
+<span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">)</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>  <span class="c1"># prints &quot;1 2&quot;</span>
+<span class="n">Foo</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">)</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>  <span class="c1"># error: there is no Foo.__init__(float, float)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot overload non-magic methods!</p>
+</div>
+<p>Classes can also be generic:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Container</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+    <span class="n">l</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Container</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">l</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Classes create objects that are passed by reference:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="o">...</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">p</span>  <span class="c1"># this is a reference!</span>
+<span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># (2, 2), (2, 2)</span>
+</pre></div>
+</div>
+<p>If you need to copy an object’s contents, implement the <code class="docutils literal notranslate"><span class="pre">__copy__</span></code> magic
+method and use <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">copy(q)</span></code> instead.</p>
+<p>Seq also supports pass-by-value types via the <code class="docutils literal notranslate"><span class="pre">type</span></code> construct:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">p</span>  <span class="c1"># this is a copy!</span>
+<span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># (1, 2), (1, 2)</span>
+</pre></div>
+</div>
+<p>However, <strong>by-value objects are immutable!</strong>. The following code will
+fail:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># error! immutable type</span>
+</pre></div>
+</div>
+<p>Under the hood, types are basically named tuples (equivalent to Python’s
+<code class="docutils literal notranslate"><span class="pre">collections.namedtuple</span></code>).</p>
+<p>You can also add methods to types:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>  <span class="c1"># types are constructed via __new__, not __init__</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># and __new__ returns a tuple representation of type&#39;s members</span>
+    <span class="k">def</span> <span class="nf">some_method</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>  <span class="c1"># p is (0, 1)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">some_method</span><span class="p">()</span>  <span class="c1"># 1</span>
+</pre></div>
+</div>
+<div class="section" id="type-extensions">
+<h3>Type extensions<a class="headerlink" href="#type-extensions" title="Permalink to this headline">¶</a></h3>
+<p>Suppose you have a class that lacks a method or an operator that might
+be really useful. You can extend that class and add the method at
+the compile time:</p>
+<div class="highlight-seq notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="c1"># we need foo.cool() but it does not exist... not a problem for Seq</span>
+<span class="k">extend</span> <span class="n">Foo</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">cool</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Foo</span><span class="p">):</span>
+        <span class="o">...</span>
+<span class="n">f</span><span class="o">.</span><span class="n">cool</span><span class="p">()</span>  <span class="c1"># works!</span>
+
+<span class="c1"># how about we add a support for adding integers and strings?</span>
+<span class="k">extend</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+<span class="mi">5</span> <span class="o">+</span> <span class="s1">&#39;4&#39;</span>  <span class="c1"># 9</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="magic-methods">
+<h3>Magic methods<a class="headerlink" href="#magic-methods" title="Permalink to this headline">¶</a></h3>
+<p>Here is a list of useful magic methods that you might want to add and
+overload:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Magic method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>operators</p></td>
+<td><p>overload unary and binary operators (see <a class="reference internal" href="#operators"><span class="std std-ref">Assignments and operators</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__copy__</span></code></p></td>
+<td><p>copy-constructor for <code class="docutils literal notranslate"><span class="pre">copy</span></code> method</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__len__</span></code></p></td>
+<td><p>for <code class="docutils literal notranslate"><span class="pre">len</span></code> method</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__bool__</span></code></p></td>
+<td><p>for <code class="docutils literal notranslate"><span class="pre">bool</span></code> method and condition checking</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__getitem__</span></code></p></td>
+<td><p>overload <code class="docutils literal notranslate"><span class="pre">obj[key]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__setitem__</span></code></p></td>
+<td><p>overload <code class="docutils literal notranslate"><span class="pre">obj[key]</span> <span class="pre">=</span> <span class="pre">value</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__delitem__</span></code></p></td>
+<td><p>overload <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">obj[key]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__iter__</span></code></p></td>
+<td><p>support iterating over the object</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__str__</span></code></p></td>
+<td><p>support printing and <code class="docutils literal notranslate"><span class="pre">str</span></code> method</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<p>Issues, feedback or comments regarding this tutorial? Let us know <a class="reference external" href="https://github.com/seq-lang/seq">on GitHub</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup.html" class="btn btn-neutral float-left" title="Set-up" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, seq-lang
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

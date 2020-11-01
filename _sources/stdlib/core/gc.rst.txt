@@ -1,0 +1,49 @@
+.. seq:module:: core.gc
+
+:seq:mod:`core.gc`
+------------------
+
+Source code: `core/gc.seq <https://github.com/seq-lang/seq/blob/master/stdlib/core/gc.seq>`_
+
+.. seq:function:: sizeof[T]()
+
+
+
+.. seq:function:: atomic[T]()
+
+
+
+.. seq:function:: alloc(sz : int)
+
+
+
+.. seq:function:: alloc_atomic(sz : int)
+
+
+
+.. seq:function:: realloc(p : cobj, sz : int)
+
+
+
+.. seq:function:: free(p : cobj)
+
+
+
+.. seq:function:: add_roots(start : cobj, end : cobj)
+
+
+
+.. seq:function:: remove_roots(start : cobj, end : cobj)
+
+
+
+.. seq:function:: clear_roots()
+
+
+
+.. seq:function:: exclude_static_roots(start : cobj, end : cobj)
+
+
+
+
+
